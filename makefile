@@ -11,6 +11,11 @@ PRGOBJDIR = program_build
 TSTDIR = test
 TSTOBJDIR = test_build
 
+# object subdirectories
+SRCDIRS = $(wildcard $(SRCDIR)/*)
+_OBJDIRS = $(patsubst $(SRCDIR)/%, %, $(SRCDIRS))
+OBJDIRS = $(addprefix $(OBJDIR)\, $(_OBJDIRS))
+
 # programs
 PROGS = $(wildcard $(PRGDIR)/*.cpp)
 _PROGS_OBJS = $(patsubst $(PRGDIR)/%.cpp, %.o, $(PROGS))
@@ -24,13 +29,18 @@ TESTS_OBJS = $(addprefix $(TSTOBJDIR)/, $(_TESTS_OBJS))
 TESTS_NAMES = $(patsubst $(TSTDIR)/%.cpp, %, $(TESTS))
 
 # all source and object files
-SRC = $(wildcard $(SRCDIR)/*.cpp)
+SRC = $(wildcard $(SRCDIR)/*/*.cpp)
 _OBJS = $(patsubst $(SRCDIR)/%.cpp, %.o, $(SRC))
 OBJS = $(addprefix $(OBJDIR)/, $(_OBJS))
 
+# include directories
+INCDIRS = $(wildcard $(INCDIR)/*)
+# include compiler flags
+INCFLAGS = $(addprefix -I, $(INCDIRS))
+
 # compiler and flags
 CC = g++
-CFLAGS = -Wall -g -I$(INCDIR)
+CFLAGS = -Wall -g $(INCFLAGS)
 LDFLAGS = 
 
 # make all
@@ -62,7 +72,7 @@ $(TSTOBJDIR)/%.o: $(TSTDIR)/%.cpp $(TSTOBJDIR)
 	$(CC) $(CFLAGS) -c $(word 1, $^) -o $@
 
 # make the object files
-$(OBJDIR)/%.o: $(SRCDIR)/%.cpp $(OBJDIR)
+$(OBJDIR)/%.o: $(SRCDIR)/%.cpp objdirs
 	$(CC) $(CFLAGS) -c $(word 1, $^) -o $@
 
 # rules for making building directories
@@ -72,8 +82,11 @@ $(TSTOBJDIR):
 $(PRGOBJDIR):
 	mkdir $(PRGOBJDIR)
 
-$(OBJDIR):
-	mkdir $(OBJDIR)
+.PHONY: objdirs
+objdirs: $(OBJDIRS)
+
+$(OBJDIRS):
+	mkdir $@
 
 $(BINDIR):
 	mkdir $(BINDIR)
