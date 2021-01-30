@@ -5,7 +5,7 @@ using namespace std;
 
 #include "token.hpp"
 
-namespace barvaztokenizer
+namespace barvazparser
 {
     ostream& operator<<(ostream& os, const Token& token)
     {
