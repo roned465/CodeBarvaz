@@ -6,7 +6,7 @@ using namespace std;
 
 #define MAX_OPERATOR_LENGTH (3)
 
-namespace barvaztokenizer 
+namespace barvazparser 
 {
     /**
      * All possible token types in the barvaz language.

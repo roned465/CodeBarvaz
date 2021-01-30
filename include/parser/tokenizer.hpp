@@ -6,7 +6,7 @@ using namespace std;
 
 #include "token.hpp"
 
-namespace barvaztokenizer 
+namespace barvazparser
 {
     typedef enum 
     {

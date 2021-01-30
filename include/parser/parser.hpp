@@ -6,7 +6,6 @@
 #include "tokenizer.hpp"
 
 using namespace barvazsyntaxtree;
-using namespace barvaztokenizer;
 
 namespace barvazparser
 {
@@ -17,7 +16,6 @@ namespace barvazparser
     {
         public:
         BarvazParser(BarvazTokenizer tokenizer);
-
 
         private:
         void advanceToken(void);

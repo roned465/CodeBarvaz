@@ -4,23 +4,24 @@
 #include "token.hpp"
 
 using namespace std;
+using namespace barvazparser;
 
 int main()
 {
-    barvaztokenizer::BarvazTokenizer lexer(cin);
-    barvaztokenizer::Token token;
+    BarvazTokenizer tokenizer(cin);
+    Token token;
     
     do
     {
         try
         {
-            token = lexer.getNextToken();
+            token = tokenizer.getNextToken();
             cout << token << endl;
         }
 
-        catch (barvaztokenizer::BarvazTokenizerError& e)
+        catch (BarvazTokenizerError& e)
         {
             cout << e.getMessage();
         }
-    } while (barvaztokenizer::ENDOFFILE != token.type);
+    } while (ENDOFFILE != token.type);
 }

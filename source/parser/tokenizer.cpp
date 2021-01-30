@@ -37,7 +37,7 @@ static inline bool is_operator(char c)
 }
 #define IS_OPERATOR(c) is_operator(c)
 
-namespace barvaztokenizer
+namespace barvazparser
 {
     BarvazTokenizerError::BarvazTokenizerError(const char * msg) : m_msg(msg) { }
 
