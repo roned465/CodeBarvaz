@@ -15,12 +15,25 @@ namespace barvazparser
     class BarvazParser
     {
         public:
-        BarvazParser(BarvazTokenizer tokenizer);
+        BarvazParser(BarvazTokenizer& tokenizer);
+
+        AST * expr(void);
+
+        AST * addExpr(void);
+
+        AST * mulExpr(void);
+
+        AST * unaryExpr(void);
+
+        AST * primary(void);
+
+        AST * atom(void);
 
         private:
         void advanceToken(void);
 
         Token m_currentToken;
+        BarvazTokenizer& tokenizer;
     };
 }
 
