@@ -1,5 +1,6 @@
 #include <iostream>
 
+#include "parser_error.hpp"
 #include "tokenizer.hpp"
 #include "token.hpp"
 
@@ -19,7 +20,7 @@ int main()
             cout << token << endl;
         }
 
-        catch (BarvazTokenizerError& e)
+        catch (BarvazParserError& e)
         {
             cout << e.getMessage();
         }
