@@ -22,7 +22,7 @@ int main()
 
     catch (BarvazParserError &e)
     {
-        cout << e.getMessage() << endl;
+        cout << e.what() << endl;
     }
 
     if (NULL != ast)

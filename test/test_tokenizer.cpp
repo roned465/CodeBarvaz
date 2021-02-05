@@ -22,7 +22,7 @@ int main()
 
         catch (BarvazParserError& e)
         {
-            cout << e.getMessage();
+            cout << e.what() << endl;
         }
     } while (ENDOFFILE != token.type);
 }

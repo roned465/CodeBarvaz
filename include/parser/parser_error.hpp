@@ -13,7 +13,7 @@ namespace barvazparser
         BarvazParserError(const char * msg);
 
         // Getter to error message
-        const char * getMessage();
+        virtual const char * what();
 
         private:
         const char * m_msg;

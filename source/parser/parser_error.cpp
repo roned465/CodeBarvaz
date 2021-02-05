@@ -8,7 +8,7 @@ namespace barvazparser
 {
     BarvazParserError::BarvazParserError(const char * msg) : m_msg(msg) { }
 
-    const char * BarvazParserError::getMessage()
+    const char * BarvazParserError::what()
     {
         return m_msg;
     }
