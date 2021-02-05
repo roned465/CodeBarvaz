@@ -18,11 +18,19 @@ namespace barvazsyntaxtree
 
     SyntaxUnaryOperator::~SyntaxUnaryOperator()
     {
-        delete m_operand;
+        if (NULL != m_operand)
+        {
+            delete m_operand;
+        }
     }
 
     void SyntaxUnaryOperator::print(void) const
     {
+        if (NULL == m_operand)
+        {
+            return;
+        }
+
         cout << "(";
         switch (m_operator)
         {

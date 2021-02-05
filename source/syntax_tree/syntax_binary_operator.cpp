@@ -19,12 +19,24 @@ namespace barvazsyntaxtree
 
     SyntaxBinaryOperator::~SyntaxBinaryOperator()
     {
-        delete m_leftOperand;
-        delete m_rightOperand;
+        if (NULL != m_leftOperand)
+        {
+            delete m_leftOperand;
+        }
+
+        if (NULL != m_rightOperand)
+        {
+            delete m_rightOperand;
+        }
     }
 
     void SyntaxBinaryOperator::print(void) const
     {
+        if (NULL == m_leftOperand || NULL == m_rightOperand)
+        {
+            return;
+        }
+
         cout << "(";
         m_leftOperand->print();
         switch (m_operator)
