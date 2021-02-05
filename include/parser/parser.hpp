@@ -30,10 +30,10 @@ namespace barvazparser
         AST * atom(void);
 
         private:
-        void advanceToken(void);
+        void advance(void);
 
         Token m_currentToken;
-        BarvazTokenizer& tokenizer;
+        BarvazTokenizer& m_tokenizer;
     };
 }
 

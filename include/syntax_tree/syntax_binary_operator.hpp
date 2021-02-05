@@ -2,8 +2,7 @@
 #define SYNTAX_BINARY_OPERATOR_H_
 
 #include "abstract_syntax_tree.hpp"
-#include "barvaz_object.hpp"
-#include "object_methods.hpp"
+#include "type.hpp"
 
 using namespace barvazobject;
 
@@ -12,15 +11,16 @@ namespace barvazsyntaxtree
     class SyntaxBinaryOperator : public AST
     {
         public:
-        virtual BarvazObject evaluate(void);
-        virtual void print(void);
+        SyntaxBinaryOperator(AST * leftOperand, AST * rightOperand, BarvazType::TypeMethod operation);
 
-        SyntaxBinaryOperator(AST * leftOperand, AST * rightOperand, ObjectMethod operation);
+        virtual ~SyntaxBinaryOperator();
+
+        virtual void print(void) const;
 
         private:
         AST * m_leftOperand;
         AST * m_rightOperand;
-        ObjectMethod m_operator;
+        BarvazType::TypeMethod m_operator;
     };
 }
 

@@ -1,17 +1,20 @@
 #ifndef ABSTRACT_SYNTAX_TREE_H_
 #define ABSTRACT_SYNTAX_TREE_H_
 
-#include "barvaz_object.hpp"
+#include <iostream>
 
-using namespace barvazobject;
+using namespace std;
 
 namespace barvazsyntaxtree
 {
     class AST
     {
         public:
-        virtual BarvazObject evaluate(void) = 0;
-        virtual void print(void) = 0;
+        virtual ~AST();
+
+        virtual void print(void) const = 0;
+
+        friend ostream& operator<<(ostream& os, const AST& ast);
     };
 }
 

@@ -4,23 +4,22 @@
 #include <string>
 
 #include "abstract_syntax_tree.hpp"
-#include "barvaz_object.hpp"
 
 using namespace std;
-using namespace barvazobject;
 
 namespace barvazsyntaxtree
 {
     class SyntaxIdentifier : public AST
     {
         public:
-        virtual BarvazObject evaluate(void);
-        virtual void print(void);
-
         SyntaxIdentifier(string name);
 
+        virtual ~SyntaxIdentifier();
+
+        virtual void print(void) const;
+
         private:
-        string name;
+        string m_name;
     };
 }
 

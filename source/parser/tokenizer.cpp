@@ -1,8 +1,10 @@
 #include <iostream>
-using namespace std;
 
+#include "parser_error.hpp"
 #include "tokenizer.hpp"
 #include "token.hpp"
+
+using namespace std;
 
 #define SIZE_OF_TAB (4)
 
@@ -39,13 +41,6 @@ static inline bool is_operator(char c)
 
 namespace barvazparser
 {
-    BarvazTokenizerError::BarvazTokenizerError(const char * msg) : m_msg(msg) { }
-
-    const char * BarvazTokenizerError::getMessage()
-    {
-        return m_msg;
-    }
-
     BarvazTokenizer::BarvazTokenizer(istream& codeStream) : m_codeStream(codeStream)
     {
         m_currentState = STATE_READING_NEWLINE_SPACING;  // Initial state of the tokenizer.
@@ -152,7 +147,7 @@ namespace barvazparser
 
         else
         {
-            throw BarvazTokenizerError("Invalid character");
+            throw BarvazParserError("Invalid character");
         }
     }
 
@@ -174,7 +169,7 @@ namespace barvazparser
 
         else if ('"' == nextCharacter)
         {
-            throw BarvazTokenizerError("Invalid syntax");
+            throw BarvazParserError("Invalid syntax");
         }
 
         else if (IS_WHITESPACE(nextCharacter))
@@ -193,7 +188,7 @@ namespace barvazparser
 
         else
         {
-            throw BarvazTokenizerError("Invalid character");
+            throw BarvazParserError("Invalid character");
         }
     }
     
@@ -245,7 +240,7 @@ namespace barvazparser
 
         else
         {
-            throw BarvazTokenizerError("Invalid character");
+            throw BarvazParserError("Invalid character");
         }
     }
 
@@ -258,7 +253,7 @@ namespace barvazparser
 
         else if (IS_CONTINUATION_OF_IDENTIFIER(nextCharacter))
         {
-            throw BarvazTokenizerError("Invalid syntax");
+            throw BarvazParserError("Invalid syntax");
         }
 
         else if (IS_OPERATOR(nextCharacter))
@@ -272,7 +267,7 @@ namespace barvazparser
 
         else if ('"' == nextCharacter)
         {
-            throw BarvazTokenizerError("Invalid syntax");
+            throw BarvazParserError("Invalid syntax");
         }
 
         else if (IS_WHITESPACE(nextCharacter))
@@ -291,7 +286,7 @@ namespace barvazparser
 
         else
         {
-            throw BarvazTokenizerError("Invalid character");
+            throw BarvazParserError("Invalid character");
         }
     }
 
@@ -314,7 +309,7 @@ namespace barvazparser
     {
         if (IS_CONTINUATION_OF_IDENTIFIER(nextCharacter))
         {
-            throw BarvazTokenizerError("Invalid syntax");
+            throw BarvazParserError("Invalid syntax");
         }
 
         else if (IS_OPERATOR(nextCharacter))
@@ -326,7 +321,7 @@ namespace barvazparser
 
         else if ('"' == nextCharacter)
         {
-            throw BarvazTokenizerError("Invalid syntax");
+            throw BarvazParserError("Invalid syntax");
         }
 
         else if (IS_WHITESPACE(nextCharacter))
@@ -341,7 +336,7 @@ namespace barvazparser
 
         else
         {
-            throw BarvazTokenizerError("Invalid character");
+            throw BarvazParserError("Invalid character");
         }
     }
 
@@ -385,7 +380,7 @@ namespace barvazparser
 
         else
         {
-            throw BarvazTokenizerError("Invalid character");
+            throw BarvazParserError("Invalid character");
         }
     }
 
@@ -454,7 +449,7 @@ namespace barvazparser
 
             if (NO_OPERATOR == m_nextToken.type)
             {
-                throw BarvazTokenizerError("Invalid Operator Parsed");
+                throw BarvazParserError("Invalid Operator Parsed");
             }
             
             if (m_currentReadOperators.empty())
@@ -518,7 +513,7 @@ namespace barvazparser
             break;
 
         default:
-            throw BarvazTokenizerError("Invalid Token Parsed");
+            throw BarvazParserError("Invalid Token Parsed");
         }
 
         return m_nextToken;

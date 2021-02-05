@@ -32,18 +32,6 @@ namespace barvazparser
         STATE_READING_SPACING,
     } TokenizerState;
 
-    class BarvazTokenizerError : public exception
-    {
-        public:
-        BarvazTokenizerError(const char * msg);
-
-        // Getter to error message
-        const char * getMessage();
-
-        private:
-        const char * m_msg;
-    };
-
     /**
      * @brief A tokenizer class for the language that parses tokens from a stream of code
      * and is implemented as a state machine that receives characters as input.

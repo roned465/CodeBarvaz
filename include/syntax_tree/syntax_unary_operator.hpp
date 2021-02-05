@@ -1,9 +1,8 @@
 #ifndef SYNTAX_UNARY_OPERATOR_H_
 #define SYNTAX_UNARY_OPERATOR_H_
 
-#include "object_methods.hpp"
 #include "abstract_syntax_tree.hpp"
-#include "barvaz_object.hpp"
+#include "type.hpp"
 
 using namespace barvazobject;
 
@@ -12,14 +11,15 @@ namespace barvazsyntaxtree
     class SyntaxUnaryOperator : public AST
     {
         public:
-        virtual BarvazObject evaluate(void);
-        virtual void print(void);
+        SyntaxUnaryOperator(AST * operand, BarvazType::TypeMethod operation);
 
-        SyntaxUnaryOperator(AST * operand, ObjectMethod operation);
+        virtual ~SyntaxUnaryOperator();
+
+        virtual void print(void) const;
 
         private:
         AST * m_operand;
-        ObjectMethod m_operator;
+        BarvazType::TypeMethod m_operator;
     };
 }
 
