@@ -8,6 +8,10 @@ using namespace barvazobject;
 
 namespace barvazsyntaxtree
 {
+    /**
+     * @brief An AST node representing a unary operator.
+     *      Contains an operand and an operator.
+     */
     class SyntaxUnaryOperator : public AST
     {
         public:
@@ -15,6 +19,10 @@ namespace barvazsyntaxtree
 
         virtual ~SyntaxUnaryOperator();
 
+        /**
+         * @brief Prints the operand with the operator to its left, inside parentheses.
+         *      e.g. for the operand 5 and the operator -, will print (-5).
+         */
         virtual void print(void) const;
 
         private:

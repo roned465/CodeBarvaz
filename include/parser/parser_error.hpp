@@ -7,16 +7,21 @@ using namespace std;
 
 namespace barvazparser
 {
+    /**
+     * @brief An exception thrown by the Barvaz parser, representing a syntax error.
+     */
     class BarvazParserError : public exception
     {
         public:
         BarvazParserError(const char * msg);
 
-        // Getter to error message
+        /**
+         * @brief Getter to the error message.
+         */
         virtual const char * what();
 
         private:
-        const char * m_msg;
+        const char * m_msg;  // The error message.
     };
 }
 

@@ -8,6 +8,10 @@ using namespace barvazobject;
 
 namespace barvazsyntaxtree
 {
+    /**
+     * @brief An AST node representing a binary operator.
+     *      Contains a left and right operand and an operator.
+     */
     class SyntaxBinaryOperator : public AST
     {
         public:
@@ -15,6 +19,10 @@ namespace barvazsyntaxtree
 
         virtual ~SyntaxBinaryOperator();
 
+        /**
+         * @brief Prints the operands with the operator between them, inside parentheses.
+         *      e.g. for the operands 4 and 3 and the operator +, will print (4 + 3).
+         */
         virtual void print(void) const;
 
         private:
