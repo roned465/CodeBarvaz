@@ -11,10 +11,18 @@ PRGOBJDIR = program_build
 TSTDIR = test
 TSTOBJDIR = test_build
 
+# include directories
+INCDIRS = 	$(INCDIR)/object 			\
+			$(INCDIR)/parser 			\
+			$(INCDIR)/syntax_tree
+
+# source directories
+SRCDIRS = 	$(SRCDIR)/parser			\
+			$(SRCDIR)/syntax_tree
+
 # object subdirectories
-SRCDIRS = $(wildcard $(SRCDIR)/*)
 _OBJDIRS = $(patsubst $(SRCDIR)/%, %, $(SRCDIRS))
-OBJDIRS = $(addprefix $(OBJDIR)\, $(_OBJDIRS))
+OBJDIRS = $(addprefix $(OBJDIR)/, $(_OBJDIRS))
 
 # programs
 PROGS = $(wildcard $(PRGDIR)/*.cpp)
@@ -33,8 +41,6 @@ SRC = $(wildcard $(SRCDIR)/*/*.cpp)
 _OBJS = $(patsubst $(SRCDIR)/%.cpp, %.o, $(SRC))
 OBJS = $(addprefix $(OBJDIR)/, $(_OBJS))
 
-# include directories
-INCDIRS = $(wildcard $(INCDIR)/*)
 # include compiler flags
 INCFLAGS = $(addprefix -I, $(INCDIRS))
 
@@ -77,19 +83,19 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.cpp objdirs
 
 # rules for making building directories
 $(TSTOBJDIR):
-	mkdir $(TSTOBJDIR)
+	mkdir "$(TSTOBJDIR)"
 
 $(PRGOBJDIR):
-	mkdir $(PRGOBJDIR)
+	mkdir "$(PRGOBJDIR)"
 
 .PHONY: objdirs
 objdirs: $(OBJDIRS)
 
 $(OBJDIRS):
-	mkdir $@
+	mkdir "$@"
 
 $(BINDIR):
-	mkdir $(BINDIR)
+	mkdir "$(BINDIR)"
 
 # make clean
 .PHONY: clean
