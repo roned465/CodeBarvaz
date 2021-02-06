@@ -14,13 +14,14 @@ namespace barvazparser
 {
     BarvazParser::BarvazParser(BarvazTokenizer& tokenizer) : m_tokenizer(tokenizer) 
     {
+        // Get the first token.
         advance();
     }
 
     void BarvazParser::advance(void)
     {
+        // Get the next token from the tokenizer and store it.
         m_currentToken = m_tokenizer.getNextToken();
-        cout << m_currentToken << endl;
     }
 
     AST * BarvazParser::expr()
@@ -52,6 +53,7 @@ namespace barvazparser
                 break;
 
             default:
+                // Reached the end of the additive expression.
                 isAddExpression = false;
                 break;
             }
@@ -62,6 +64,8 @@ namespace barvazparser
             }
 
             rightOperand = mulExpr();
+            
+            // Construct the AST.
             leftOperand = new SyntaxBinaryOperator(leftOperand, rightOperand, operation);
         }
 
@@ -97,6 +101,7 @@ namespace barvazparser
                 break;
 
             default:
+                // Reached the end of the multiplicative expression.
                 isMulExpression = false;
                 break;
             }
@@ -107,6 +112,8 @@ namespace barvazparser
             }
 
             rightOperand = unaryExpr();
+            
+            // Construct the AST.
             leftOperand = new SyntaxBinaryOperator(leftOperand, rightOperand, operation);
         }
 
@@ -132,10 +139,12 @@ namespace barvazparser
             break;
         
         default:
+            // Reached the end of the unary expression.
             isUnaryExpression = false;
             break;
         }
 
+        // Construct the AST.
         if (isUnaryExpression)
         {
             ast = new SyntaxUnaryOperator(unaryExpr(), operation);
@@ -172,8 +181,12 @@ namespace barvazparser
 
         case LPAR:
             advance();
+
+            // Parse the expression inside the parentheses.
             ast = expr();
             
+            // Expect for a closing right parenthesis.
+            // If there isn't, any there is a syntax error.
             if (RPAR == m_currentToken.type)
             {
                 advance();
@@ -186,6 +199,8 @@ namespace barvazparser
 
             break;
 
+        // If none of the cases is true, an atomic unit cannot be parsed
+        // and there is a syntax error 
         default:
             throw BarvazParserError("Invalid syntax");
         }
